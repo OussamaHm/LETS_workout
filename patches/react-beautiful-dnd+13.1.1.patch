@@ -1,0 +1,76 @@
+diff --git a/node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js b/node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js
+index 9884a22..03046f1 100644
+--- a/node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js
++++ b/node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js
+@@ -7,7 +7,7 @@
+ import { createPortal, findDOMNode } from 'react-dom';
+ import PropTypes from 'prop-types';
+ 
+-var index = (value, length) => {
++var index = function index(value, length) {
+   if (value >= 0) {
+     return value;
+   }
+@@ -786,7 +786,7 @@
+ 
+ function _default() {}
+ 
+-var AppContext = React.createContext(null);
++var AppContext = /*#__PURE__*/React.createContext(null);
+ 
+ vardragHandle = "data-rbd-drag-handle-draggable-id";
+ vardragHandleContextId = "data-rbd-drag-handle-context-id";
+@@ -3451,7 +3451,7 @@
+   return Boolean(provided.draggableProps && provided.dragHandleProps);
+ }
+ 
+-var DraggableDimensionPublisher = class extends React.Component {
++var DraggableDimensionPublisher = /*#__PURE__*/function (_React$Component) {
+   _inherits(DraggableDimensionPublisher, _React$Component);
+ 
+   var _super = _createSuper(DraggableDimensionPublisher);
+@@ -3514,7 +3514,7 @@
+   return dimension;
+ };
+ 
+-var DroppableDimensionPublisher = class extends React.Component {
++var DroppableDimensionPublisher = /*#__PURE__*/function (_React$Component2) {
+   _inherits(DroppableDimensionPublisher, _React$Component2);
+ 
+   var _super2 = _createSuper(DroppableDimensionPublisher);
+@@ -4836,7 +4836,7 @@
+ var zIndexOptions = {
+   dragging: 5000,
+   dropAnimating: 4500
+-};
++}; 
+ 
+ var getWindowScroll = () => ({
+   x: window.pageXOffset,
+@@ -6289,7 +6289,7 @@
+   }, children);
+ });
+ 
+-var Draggable = class extends React.Component {
++var Draggable = /*#__PURE__*/function (_React$Component3) {
+   _inherits(Draggable, _React$Component3);
+ 
+   var _super3 = _createSuper(Draggable);
+@@ -6755,7 +6755,7 @@
+   }
+ };
+ 
+-var Droppable = class extends React.Component {
++var Droppable = /*#__PURE__*/function (_React$Component4) {
+   _inherits(Droppable, _React$Component4);
+ 
+   var _super4 = _createSuper(Droppable);
+@@ -7349,7 +7349,7 @@
+   }
+ };
+ 
+-var DragDropContext = class extends React.Component {
++var DragDropContext = /*#__PURE__*/function (_React$Component5) {
+   _inherits(DragDropContext, _React$Component5);
+ 
+   var _super5 = _createSuper(DragDropContext);
