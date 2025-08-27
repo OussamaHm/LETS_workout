@@ -1,4 +1,3 @@
-
 "use client";
 
 import { z } from "zod";
@@ -55,7 +54,7 @@ export default function LogForm({ isOpen, setIsOpen, date, exercise, log }: LogF
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "weights"
+    name: "weights",
   });
 
   useEffect(() => {
@@ -67,19 +66,18 @@ export default function LogForm({ isOpen, setIsOpen, date, exercise, log }: LogF
     }
   }, [log, exercise, isOpen, form]);
 
-
   function onSubmit(values: z.infer<typeof logSchema>) {
     // Create a snapshot of the exercise details at the time of logging
-    const logData: Omit<Log, 'id'> = {
-        exerciseId: exercise.id,
-        exerciseName: exercise.name,
-        targetSets: exercise.targetSets,
-        targetReps: exercise.targetReps,
-        targetWeight: exercise.targetWeight,
-        actualSets: values.weights.length,
-        actualReps: exercise.targetReps, // Assuming reps are constant as per plan
-        weights: values.weights,
-    }
+    const logData: Omit<Log, "id"> = {
+      exerciseId: exercise.id,
+      exerciseName: exercise.name,
+      targetSets: exercise.targetSets,
+      targetReps: exercise.targetReps,
+      targetWeight: exercise.targetWeight,
+      actualSets: values.weights.length,
+      actualReps: exercise.targetReps, // Assuming reps are constant as per plan
+      weights: values.weights,
+    };
 
     addLog(dateString, logData);
     setIsOpen(false);
@@ -94,35 +92,50 @@ export default function LogForm({ isOpen, setIsOpen, date, exercise, log }: LogF
         </DialogHeader>
 
         {exercise.imageUrl && exercise.imageUrl.match(/\.(jpeg|jpg|gif|png)$/) != null && (
-            <div className="relative w-full h-48">
-                 <Image data-ai-hint="exercise fitness" src={exercise.imageUrl} alt={exercise.name} fill className="rounded-md object-cover"/>
-            </div>
+          <div className="relative h-48 w-full">
+            <Image
+              data-ai-hint="exercise fitness"
+              src={exercise.imageUrl}
+              alt={exercise.name}
+              fill
+              className="rounded-md object-cover"
+            />
+          </div>
         )}
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
             <div className="space-y-2">
-                {fields.map((field, index) => (
-                    <FormField
-                    key={field.id}
-                    control={form.control}
-                    name={`weights.${index}`}
-                    render={({ field }) => (
-                        <FormItem className="flex items-center gap-4 space-y-0">
-                            <FormLabel className="w-16">Set {index + 1}</FormLabel>
-                            <FormControl>
-                                <Input type="number" step="0.5" {...field} className="flex-1" />
-                            </FormControl>
-                            <span className="text-sm text-muted-foreground">kg</span>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-                ))}
+              {fields.map((field, index) => (
+                <FormField
+                  key={field.id}
+                  control={form.control}
+                  name={`weights.${index}`}
+                  render={({ field }) => (
+                    <FormItem className="flex items-center gap-4 space-y-0">
+                      <FormLabel className="w-16">Set {index + 1}</FormLabel>
+                      <FormControl>
+                        <Input type="number" step="0.5" {...field} className="flex-1" />
+                      </FormControl>
+                      <span className="text-sm text-muted-foreground">kg</span>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
             </div>
-             <div className="flex justify-between gap-2">
-                <Button type="button" variant="outline" onClick={() => append(exercise.targetWeight ?? 0)}>Add Set</Button>
-                <Button type="button" variant="destructive" onClick={() => remove(fields.length - 1)} disabled={fields.length === 0}>Remove Set</Button>
+            <div className="flex justify-between gap-2">
+              <Button type="button" variant="outline" onClick={() => append(exercise.targetWeight ?? 0)}>
+                Add Set
+              </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => remove(fields.length - 1)}
+                disabled={fields.length === 0}
+              >
+                Remove Set
+              </Button>
             </div>
             <DialogFooter>
               <Button type="submit">{log ? "Save Changes" : "Log"}</Button>
